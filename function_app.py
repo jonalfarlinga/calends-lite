@@ -7,7 +7,6 @@ import json
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 
-@app.function_name(name="list")
 @app.route(route="list")
 def list(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Retrieving API list')
