@@ -11,5 +11,6 @@ export default defineConfig({
     watch: {
         usePolling: true,
     },
+    base: 'jonalfarlinga.github.io'
   },
 })
