@@ -36,17 +36,25 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: build
     runs-on: ubuntu-latest
-
     steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v2
+    - uses: actions/checkout@v3
+    - uses: azure/login@v1
       with:
-        name: production-files
-        path: ./vite-react/dist
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+        creds: ${{ secrets.AZURE_CREDENTIALS_CALENDS_RG }}
+    - name: Upload to blob storage
+      uses: azure/CLI@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./vite-react/dist
+        inlineScript: |
+          az storage blob upload-batch --account-name calendsliteapi --auth-mode key -d '$web' -s ./vite-react/dist --overwrite
+       # - name: Purge CDN endpoint
+        #   uses: azure/CLI@v1
+        #   with:
+        #     inlineScript: |
+        #        az cdn endpoint purge --content-paths  "/*" --profile-name "cdnprofile2kjoo37i24nsw" --name "staticweb2kjoo37i24nsw" --resource-group "bucklin-portfolio-RG"
+
+      # Azure logout
+    - name: logout
+      run: |
+        az logout
+      if: always()
