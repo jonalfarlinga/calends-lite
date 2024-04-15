@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { VITE_BACKEND_HOST } from "./env";
 
 function Calendar(props) {
     const [dates, setDates] = useState([]);
@@ -6,7 +7,7 @@ function Calendar(props) {
 
     const fetchData = useCallback(async () => {
         const url = new URL(
-            `${import.meta.env.VITE_BACKEND_HOST}/api/${props.api}`
+            `${VITE_BACKEND_HOST}/api/${props.api}`
         );
         const params = {
             start: props.start,

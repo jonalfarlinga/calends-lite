@@ -1,6 +1,7 @@
 import Calendar from './Calendar.jsx'
 import { useState, useEffect } from 'react';
 import Inputs from './Inputs.jsx';
+import { VITE_BACKEND_HOST } from './env.js';
 
 const initialData = {
     start: "",
@@ -22,7 +23,7 @@ function Form({uniStyle, setUniStyle}) {
     const [err, setErr] = useState('')
 
     const getAPIs = async () => {
-        const url = `${import.meta.env.VITE_BACKEND_HOST}/api/list`;
+        const url = `${VITE_BACKEND_HOST}/api/list`;
 
         try {
             const response = await fetch(url);
