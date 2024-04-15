@@ -25,18 +25,14 @@ jobs:
         npm install
         npm run build
 
-
-    - name: List data
-      run: ls -R ./dist
-
     - name: Upload production-ready build files
       uses: actions/upload-artifact@v2
       with:
         name: production-files
-        path: ./dist
+        path: ./vite-react/dist
 
     - name: List artifacts
-      run: ls -R ./dist
+      run: ls -R ./vite-react/dist
 
   deploy:
     name: Deploy
@@ -48,9 +44,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: production-files
-        path: ./dist
+        path: ./vite-react/dist
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+        publish_dir: ./vite-react/dist
