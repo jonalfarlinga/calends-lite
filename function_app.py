@@ -10,7 +10,7 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 @app.function_name(name="list")
 @app.route(route="list")
 def list(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Retreiving API list')
+    logging.info('Retrieving API list')
 
     return func.HttpResponse(
         json.dumps({
@@ -29,7 +29,7 @@ def list(req: func.HttpRequest) -> func.HttpResponse:
 
 @app.route(route="TXST_calendar")
 def TXST_calendar(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Retreiving TXST calendar')
+    logging.info('Retrieving TXST calendar')
 
     start = datetime.strptime(req.params.get('start'), "%m%d%y")
     end = datetime.strptime(req.params.get('end'), "%m%d%y")
@@ -82,7 +82,7 @@ def SUU_calendar(req: func.HttpRequest) -> func.HttpResponse:
 
 @app.route(route="CSV_calendar")
 def CSV_calendar(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Retreiving calendar with CSV holidays')
+    logging.info('Retrieving calendar with CSV holidays')
     logging.error('NOT YET IMPLEMENTED')
     return func.HttpResponse(
         "This endpoint has not been implemented",
