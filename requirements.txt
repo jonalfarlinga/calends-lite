@@ -1,6 +1,14 @@
-# DO NOT include azure-functions-worker in this file
-# The Python Worker is managed by Azure Functions platform
-# Manually managing azure-functions-worker may cause unexpected issues
-
-azure-functions
-pydantic
+annotated-types==0.6.0
+azure-functions==1.19.0
+beautifulsoup4==4.12.3
+bs4==0.0.2
+certifi==2024.2.2
+charset-normalizer==3.3.2
+idna==3.7
+lxml==5.2.1
+pydantic==2.7.0
+pydantic_core==2.18.1
+requests==2.31.0
+soupsieve==2.5
+typing_extensions==4.11.0
+urllib3==2.2.1

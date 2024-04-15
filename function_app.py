@@ -7,6 +7,7 @@ import json
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 
+@app.function_name(name="list")
 @app.route(route="list")
 def list(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Retreiving API list')
@@ -30,9 +31,9 @@ def list(req: func.HttpRequest) -> func.HttpResponse:
 def TXST_calendar(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Retreiving TXST calendar')
 
-    start = datetime.strptime(req.route_params.get('start'), "%m%d%y")
-    end = datetime.strptime(req.route_params.get('end'), "%m%d%y")
-    weekdays = req.route_params.get('weekdays')
+    start = datetime.strptime(req.params.get('start'), "%m%d%y")
+    end = datetime.strptime(req.params.get('end'), "%m%d%y")
+    weekdays = req.params.get('weekdays')
     logging.info(f"Getting TXST holidays from {start} to {end} on {weekdays}")
     holidays = get_TXST_holidays(start, end)
     logging.info(f"Dates returned: {holidays}")
@@ -59,10 +60,9 @@ def SUU_calendar(req: func.HttpRequest) -> func.HttpResponse:
         "assignments": list that is blank except on holidays,
     '''
     logging.info('Retrieving SUU calendar')
-
-    start = datetime.strptime(req.route_params.get('start'), "%m%d%y")
-    end = datetime.strptime(req.route_params.get('end'), "%m%d%y")
-    weekdays = req.route_params.get('weekdays')
+    start = datetime.strptime(req.params.get('start'), "%m%d%y")
+    end = datetime.strptime(req.params.get('end'), "%m%d%y")
+    weekdays = req.params.get('weekdays')
     logging.info(f"Getting SUU holidays from {start} to {end} on {weekdays}")
     holidays = get_SUU_holidays(start, end)
     logging.info(f"Dates returned: {holidays}")
@@ -77,4 +77,14 @@ def SUU_calendar(req: func.HttpRequest) -> func.HttpResponse:
         json.dumps(class_dates),
         mimetype="application/json",
         status_code=200
+    )
+
+
+@app.route(route="CSV_calendar")
+def CSV_calendar(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Retreiving calendar with CSV holidays')
+    logging.error('NOT YET IMPLEMENTED')
+    return func.HttpResponse(
+        "This endpoint has not been implemented",
+        status_code=501
     )

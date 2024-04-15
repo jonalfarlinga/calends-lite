@@ -1,4 +1,4 @@
-from typing import List
+""" from typing import List
 from pydantic import BaseModel
 import logging
 
@@ -25,3 +25,4 @@ def model_to_json(data: BaseModel | List[BaseModel]):
             output.append(datum.model_dump)
         logging.info(f'Outputting {output}')
         return output
+ """
