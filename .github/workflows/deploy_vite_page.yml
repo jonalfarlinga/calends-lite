@@ -25,11 +25,18 @@ jobs:
         npm install
         npm run build
 
+
+    - name: List data
+      run: ls -R ./dist
+
     - name: Upload production-ready build files
       uses: actions/upload-artifact@v2
       with:
         name: production-files
         path: ./dist
+
+    - name: List artifacts
+      run: ls -R ./dist
 
   deploy:
     name: Deploy
