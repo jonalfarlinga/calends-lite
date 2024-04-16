@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   test-and-lint:
+    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

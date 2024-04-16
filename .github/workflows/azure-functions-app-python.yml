@@ -1,4 +1,4 @@
-name: Deploy calends-lite functions to calendsliteapi Function App
+name: Deploy Function App
 
 on:
   push:
