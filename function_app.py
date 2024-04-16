@@ -10,6 +10,7 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 @app.route(route="list")
 def list(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Retrieving API list')
+    logging.info('Retrieving API list')
 
     return func.HttpResponse(
         json.dumps({
@@ -26,8 +27,9 @@ def list(req: func.HttpRequest) -> func.HttpResponse:
     )
 
 
-@app.route(route="TXST_calendar")
+@app.route(route="api/TXST_calendar")
 def TXST_calendar(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Retrieving TXST calendar')
     logging.info('Retrieving TXST calendar')
 
     start = datetime.strptime(req.params.get('start'), "%m%d%y")
@@ -50,7 +52,7 @@ def TXST_calendar(req: func.HttpRequest) -> func.HttpResponse:
     )
 
 
-@app.route(route="SUU_calendar")
+@app.route(route="api/SUU_calendar")
 def SUU_calendar(req: func.HttpRequest) -> func.HttpResponse:
     '''
     On GET request returns a dictionary with three keys:
@@ -79,8 +81,9 @@ def SUU_calendar(req: func.HttpRequest) -> func.HttpResponse:
     )
 
 
-@app.route(route="CSV_calendar")
+@app.route(route="api/CSV_calendar")
 def CSV_calendar(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Retrieving calendar with CSV holidays')
     logging.info('Retrieving calendar with CSV holidays')
     logging.error('NOT YET IMPLEMENTED')
     return func.HttpResponse(
