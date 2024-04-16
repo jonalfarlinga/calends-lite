@@ -1,9 +1,9 @@
 name: Static Web CI/CD
 
 on:
-  push
-    # branches:
-    #   - main
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -53,7 +53,8 @@ jobs:
       with:
         inlineScript: |
           az storage blob upload-batch --account-name calendsliteapi --auth-mode key -d '$web' -s ./vite-react/dist --overwrite
-       # - name: Purge CDN endpoint
+        # THIS step can be added later to handle the Custom domain
+        # - name: Purge CDN endpoint
         #   uses: azure/CLI@v1
         #   with:
         #     inlineScript: |
