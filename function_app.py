@@ -7,7 +7,6 @@ import json
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 
-@app.function_name(name="list")
 @app.route(route="list")
 def list(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Retrieving API list')
@@ -28,8 +27,18 @@ def list(req: func.HttpRequest) -> func.HttpResponse:
     )
 
 
-@app.route(route="api/TXST_calendar")
+@app.route(route="TXST_calendar")
 def TXST_calendar(req: func.HttpRequest) -> func.HttpResponse:
+    '''
+    Responds to a GET with a query string including:
+        start: "ddmmyy"
+        end: "ddmmyy"
+        weekdays: "SMTWRFA"
+    On GET request returns a dictionary with three keys:
+        "dates": list of dates the class meets,
+        "topics": list of blanks for filling in topic for the day,
+        "assignments": list that is blank except on holidays,
+    '''
     try:
         logging.info('Retrieving TXST calendar')
         logging.info('Retrieving TXST calendar')
@@ -61,9 +70,13 @@ def TXST_calendar(req: func.HttpRequest) -> func.HttpResponse:
         )
 
 
-@app.route(route="api/SUU_calendar")
+@app.route(route="SUU_calendar")
 def SUU_calendar(req: func.HttpRequest) -> func.HttpResponse:
     '''
+    Responds to a GET with a query string including:
+        start: "ddmmyy"
+        end: "ddmmyy"
+        weekdays: "SMTWRFA"
     On GET request returns a dictionary with three keys:
         "dates": list of dates the class meets,
         "topics": list of blanks for filling in topic for the day,
@@ -98,8 +111,18 @@ def SUU_calendar(req: func.HttpRequest) -> func.HttpResponse:
         )
 
 
-@app.route(route="api/CSV_calendar")
+@app.route(route="CSV_calendar")
 def CSV_calendar(req: func.HttpRequest) -> func.HttpResponse:
+    '''
+    Responds to a GET with a query string including:
+        start: "ddmmyy"
+        end: "ddmmyy"
+        weekdays: "SMTWRFA"
+    On GET request returns a dictionary with three keys:
+        "dates": list of dates the class meets,
+        "topics": list of blanks for filling in topic for the day,
+        "assignments": list that is blank except on holidays,
+    '''
     logging.info('Retrieving calendar with CSV holidays')
     logging.info('Retrieving calendar with CSV holidays')
     logging.error('NOT YET IMPLEMENTED')
