@@ -10,7 +10,6 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 @app.route(route="list")
 def list(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Retrieving API list')
-    logging.info('Retrieving API list')
 
     return func.HttpResponse(
         json.dumps({
@@ -40,7 +39,6 @@ def TXST_calendar(req: func.HttpRequest) -> func.HttpResponse:
         "assignments": list that is blank except on holidays,
     '''
     try:
-        logging.info('Retrieving TXST calendar')
         logging.info('Retrieving TXST calendar')
 
         start = datetime.strptime(req.params.get('start'), "%m%d%y")
@@ -123,7 +121,6 @@ def CSV_calendar(req: func.HttpRequest) -> func.HttpResponse:
         "topics": list of blanks for filling in topic for the day,
         "assignments": list that is blank except on holidays,
     '''
-    logging.info('Retrieving calendar with CSV holidays')
     logging.info('Retrieving calendar with CSV holidays')
     logging.error('NOT YET IMPLEMENTED')
     return func.HttpResponse(
