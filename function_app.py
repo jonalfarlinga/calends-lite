@@ -7,6 +7,7 @@ import json
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 
+@app.function_name(name="list")
 @app.route(route="list")
 def list(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Retrieving API list')
@@ -29,27 +30,35 @@ def list(req: func.HttpRequest) -> func.HttpResponse:
 
 @app.route(route="api/TXST_calendar")
 def TXST_calendar(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Retrieving TXST calendar')
-    logging.info('Retrieving TXST calendar')
+    try:
+        logging.info('Retrieving TXST calendar')
+        logging.info('Retrieving TXST calendar')
 
-    start = datetime.strptime(req.params.get('start'), "%m%d%y")
-    end = datetime.strptime(req.params.get('end'), "%m%d%y")
-    weekdays = req.params.get('weekdays')
-    logging.info(f"Getting TXST holidays from {start} to {end} on {weekdays}")
-    holidays = get_TXST_holidays(start, end)
-    logging.info(f"Dates returned: {holidays}")
-    class_dates = build_dates(
-        start,
-        end,
-        weekdays,
-        holidays
-    )
-    logging.info("Returning calendar")
-    return func.HttpResponse(
-        json.dumps(class_dates),
-        mimetype="application/json",
-        status_code=200
-    )
+        start = datetime.strptime(req.params.get('start'), "%m%d%y")
+        end = datetime.strptime(req.params.get('end'), "%m%d%y")
+        weekdays = req.params.get('weekdays')
+        logging.info(
+            f"Getting TXST holidays from {start} to {end} on {weekdays}")
+        holidays = get_TXST_holidays(start, end)
+        logging.info(f"Dates returned: {holidays}")
+        class_dates = build_dates(
+            start,
+            end,
+            weekdays,
+            holidays
+        )
+        logging.info("Returning calendar")
+        return func.HttpResponse(
+            json.dumps(class_dates),
+            mimetype="application/json",
+            status_code=200
+        )
+    except ValueError as e:
+        return func.HttpResponse(
+            json.dumps({"error": "Bad Request: " + str(e)}),
+            mimetype="application/json",
+            status_code=400
+        )
 
 
 @app.route(route="api/SUU_calendar")
@@ -60,25 +69,33 @@ def SUU_calendar(req: func.HttpRequest) -> func.HttpResponse:
         "topics": list of blanks for filling in topic for the day,
         "assignments": list that is blank except on holidays,
     '''
-    logging.info('Retrieving SUU calendar')
-    start = datetime.strptime(req.params.get('start'), "%m%d%y")
-    end = datetime.strptime(req.params.get('end'), "%m%d%y")
-    weekdays = req.params.get('weekdays')
-    logging.info(f"Getting SUU holidays from {start} to {end} on {weekdays}")
-    holidays = get_SUU_holidays(start, end)
-    logging.info(f"Dates returned: {holidays}")
-    class_dates = build_dates(
-        start,
-        end,
-        weekdays,
-        holidays
-    )
-    logging.info('Returning calendar')
-    return func.HttpResponse(
-        json.dumps(class_dates),
-        mimetype="application/json",
-        status_code=200
-    )
+    try:
+        logging.info('Retrieving SUU calendar')
+        start = datetime.strptime(req.params.get('start'), "%m%d%y")
+        end = datetime.strptime(req.params.get('end'), "%m%d%y")
+        weekdays = req.params.get('weekdays')
+        logging.info(
+            f"Getting SUU holidays from {start} to {end} on {weekdays}")
+        holidays = get_SUU_holidays(start, end)
+        logging.info(f"Dates returned: {holidays}")
+        class_dates = build_dates(
+            start,
+            end,
+            weekdays,
+            holidays
+        )
+        logging.info('Returning calendar')
+        return func.HttpResponse(
+            json.dumps(class_dates),
+            mimetype="application/json",
+            status_code=200
+        )
+    except ValueError as e:
+        return func.HttpResponse(
+            json.dumps({"error": "Bad Request: " + str(e)}),
+            mimetype="application/json",
+            status_code=400
+        )
 
 
 @app.route(route="api/CSV_calendar")
