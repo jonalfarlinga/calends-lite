@@ -2,6 +2,7 @@ import Calendar from './Calendar.jsx'
 import { useState, useEffect } from 'react';
 import Inputs from './Inputs.jsx';
 import { VITE_BACKEND_HOST } from './env.js';
+import setStyle from '../styles/setStyle.js';
 
 const initialData = {
     start: "",
@@ -19,7 +20,12 @@ const initialData = {
 function Form({uniStyle, setUniStyle}) {
     const [calendar, setCalendar] = useState(null);
     const [formData, setFormData] = useState(initialData);
-    const [apis, setAPIs] = useState([])
+    const [apis, setAPIs] = useState([
+        {
+            href: "#",
+            name: "Loading..."
+        }
+    ])
     const [err, setErr] = useState('')
 
     const getAPIs = async () => {
@@ -121,8 +127,7 @@ function Form({uniStyle, setUniStyle}) {
                 setUniStyle={setUniStyle} />
               <button
                 className=
-                  { "btn btn-primary " +
-                    (uniStyle ? "btn-" + uniStyle : null) }
+                    {setStyle("btn btn-primary ", "btn-primary-", uniStyle)}
               >
                 Get Calendar
               </button>

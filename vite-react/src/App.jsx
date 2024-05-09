@@ -2,6 +2,7 @@ import './styles/App.css';
 import Form from './components/Form.jsx';
 import WelcomeModal from './components/WelcomeModal.jsx';
 import { useState } from 'react';
+import setStyle from './styles/setStyle.js';
 
 
 function App() {
@@ -9,18 +10,17 @@ function App() {
   return (
     <div
       className=
-        { "App " + (uniStyle ? uniStyle : null) }
+        {setStyle("App", "", uniStyle)}
     >
       <header
         className=
-          { "App-header " + (uniStyle ? uniStyle + "-header" : null) }
+        {setStyle("App-header", "header", uniStyle)}
       >
         <img className="mt-3 hero" src="./calends512.png" alt="logo" />
       </header>
       <div
         className=
-          { "fade-border " +
-            (uniStyle ? "fade-border-" + uniStyle : null) }
+        {setStyle("face-border", "fade-border-", uniStyle)}
       >
         <h1>Calends Online</h1>
       </div>
@@ -28,7 +28,7 @@ function App() {
         <button
           type="button"
           className=
-            { "btn btn-primary " + (uniStyle ? "btn-" + uniStyle : null) }
+            {setStyle("btn btn-primary ", "btn-", uniStyle)}
           data-bs-toggle="modal"
           data-bs-target="#welcomeModal">
             About
@@ -40,7 +40,7 @@ function App() {
 
       </main>
       <footer>
-        <a href="https://github.com/jonalfarlinga/calends-online">Calends-Online Github Project</a>
+        <a href="https://github.com/jonalfarlinga/calends-lit">Calends-Lite Github Project</a>
         <a href="https://commons.wikimedia.org/wiki/File:Museo_del_Teatro_Romano_de_Caesaraugusta.43.jpg">Museo del Teatro Romano de Caesaraugusta.43.jpg</a> from Wikipedia.org
       </footer>
     </div>

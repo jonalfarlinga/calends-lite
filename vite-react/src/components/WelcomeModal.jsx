@@ -1,3 +1,5 @@
+import setStyle from "../styles/setStyle"
+
 export default function WelcomeModal({uniStyle}) {
     return (
         <div
@@ -18,8 +20,7 @@ export default function WelcomeModal({uniStyle}) {
                 <button
                     type="button"
                     className=
-                      { "btn btn-primary " +
-                        (uniStyle ? "btn-" + uniStyle : null) }
+                      {setStyle("btn btn-primary ", "btn-", uniStyle)}
                     data-bs-dismiss="modal"
                     aria-label="Close"
                 ></button>
@@ -35,8 +36,7 @@ export default function WelcomeModal({uniStyle}) {
                 <button
                     type="button"
                     className=
-                      { "btn btn-primary " +
-                        (uniStyle ? "btn-" + uniStyle : null) }
+                      {setStyle("btn btn-primary ", "btn-", uniStyle)}
                     data-bs-dismiss="modal"
                 >
                   Get Started
