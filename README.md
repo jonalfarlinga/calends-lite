@@ -1,9 +1,9 @@
-# calends-online ver 0.1
-This app presents an html table showing the class meeting dates for a specified time frame and automatically fills in when those dates fall on hoidays. The program is run on Docker-Compose and outputs a document to the user-configured location. Calends currently supports SUU and TXST Academic Calendars.
+# calends-lite ver 1.0
+This app presents an HTML table, showing the class meeting dates for a specified time frame and automatically fills in when those dates fall on hoidays. The backend runs on Azure serverless technology. Calends currently supports SUU and TXST Academic Calendars.
 
 # Quickstart
 
-Navigate to [Calends Online](https://calends.azureedge.net)
+Navigate to [Calends Online](https://calends.proficientdr.com)
 
 ![Calends App](img\CalendsApp.png)
 
@@ -19,9 +19,26 @@ Navigate to [Calends Online](https://calends.azureedge.net)
 
 # Output
 
-Calends creates a table in html and presents it filling in class dates and holidays. You can easily highlight and copy/paste into your favorite document writing program.
+Calends creates a table in HTML and presents it to the user, filling in class dates and holidays. You can easily highlight and copy/paste into your favorite document writing program.
 
 ![CalendsOutput](img\CalendsOut.png)
+
+# API Documentation
+
+- _/api/TXST_calendar_
+- _/api/SUU_calendar_
+
+Responds to a GET request with a query string including:
+>    start: "ddmmyy"<br>
+>    end: "ddmmyy"<br>
+>   weekdays: "SMTWRFA"<br>
+
+On GET request returns a dictionary with three keys:
+>   "dates": list of dates the class meets,<br>
+>   "topics": list of blanks for filling in topic for the day,<br>
+>   "assignments": list that is blank except on holidays,<br>
+
+
 
 # Contact and Copyright
 
