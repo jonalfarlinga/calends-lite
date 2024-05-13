@@ -1,11 +1,18 @@
 # calends-lite ver 1.0
 This app presents an HTML table, showing the class meeting dates for a specified time frame and automatically fills in when those dates fall on hoidays. The backend runs on Azure serverless technology. Calends currently supports SUU and TXST Academic Calendars.
 
-# Quickstart
+### Contents
+
+- [Quickstart](#quickstart)
+  - [Output](#output)
+- [API Documentation](#api-documentation)
+- [Contacts and Copyright](#contact-and-copyright)
+
+## Quickstart
 
 Navigate to [Calends Online](https://calends.proficientdr.com)
 
-![Calends App](img\CalendsApp.png)
+![Calends App image](img\CalendsApp.png)
 
 1. Choose an institution from the dropdown list
 
@@ -17,30 +24,46 @@ Navigate to [Calends Online](https://calends.proficientdr.com)
 
 5. Click `Get Calendar`!
 
-# Output
+### Output
 
 Calends creates a table in HTML and presents it to the user, filling in class dates and holidays. You can easily highlight and copy/paste into your favorite document writing program.
 
 ![CalendsOutput](img\CalendsOut.png)
 
-# API Documentation
+## API Documentation
+
+- /api/list
+
+Responds to a GET request with a hard-coded list of the active endpoints including the path and description.
+
+For example:
+
+```json
+{
+    "apis": [
+        {"name": "Texas State", "href": "TXST_calendar"},
+        {"name": "Southern Utah", "href": "SUU_calendar"},
+        {"name": "Invalid - Comma-Separated Values", "href": "CSV_calendar"}
+    ]
+}
+```
 
 - _/api/TXST_calendar_
 - _/api/SUU_calendar_
 
-Responds to a GET request with a query string including:
+Responds to a GET request that includes a query string with the following arguments:
 >    start: "ddmmyy"<br>
 >    end: "ddmmyy"<br>
 >   weekdays: "SMTWRFA"<br>
 
-On GET request returns a dictionary with three keys:
+The endpoint activates the Calends anti-corruption layer that srapes the target institution's calendar page and extracts holiday dates. Then the dates of class meetings are constructed, fikking in data where the holiday dates intersect with class meetings.
+
+On a successful GET request, returns a dictionary with three keys:
 >   "dates": list of dates the class meets,<br>
 >   "topics": list of blanks for filling in topic for the day,<br>
 >   "assignments": list that is blank except on holidays,<br>
 
-
-
-# Contact and Copyright
+## Contact and Copyright
 
 Created by Denny Bucklin aka [jonalfarlinga](https://github.com/jonalfarlinga)
 
