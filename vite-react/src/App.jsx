@@ -40,7 +40,7 @@ function App() {
 
       </main>
       <footer>
-        <a href="https://github.com/jonalfarlinga/calends-online">Calends-Online Github Project</a>
+        <a href="https://github.com/jonalfarlinga/calends-lite">Calends Github Project</a>
         <a href="https://commons.wikimedia.org/wiki/File:Museo_del_Teatro_Romano_de_Caesaraugusta.43.jpg">Museo del Teatro Romano de Caesaraugusta.43.jpg</a> from Wikipedia.org
       </footer>
     </div>
