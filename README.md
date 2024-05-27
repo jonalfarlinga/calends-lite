@@ -30,7 +30,7 @@ Calends creates a table in HTML and presents it to the user, filling in class da
 
 ![CalendsOutput](img\CalendsOut.png)
 
-# API Documentation
+## API Documentation
 
 - /api/list
 
@@ -63,7 +63,7 @@ On a successful GET request, returns a dictionary with three keys:
 >   "topics": list of blanks for filling in topic for the day,<br>
 >   "assignments": list that is blank except on holidays,<br>
 
-# Contact and Copyright
+## Contact and Copyright
 
 Created by Denny Bucklin aka [jonalfarlinga](https://github.com/jonalfarlinga)
 
