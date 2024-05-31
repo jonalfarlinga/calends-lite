@@ -12,7 +12,7 @@ This app presents an HTML table, showing the class meeting dates for a specified
 
 Navigate to [Calends Online](https://calends.proficientdr.com)
 
-![Calends App image](img\CalendsApp.png)
+![Calends App image](img/CalendsApp.png)
 
 1. Choose an institution from the dropdown list
 
@@ -28,7 +28,7 @@ Navigate to [Calends Online](https://calends.proficientdr.com)
 
 Calends creates a table in HTML and presents it to the user, filling in class dates and holidays. You can easily highlight and copy/paste into your favorite document writing program.
 
-![CalendsOutput](img\CalendsOut.png)
+![CalendsOutput](img/CalendsOut.png)
 
 ## API Documentation
 
